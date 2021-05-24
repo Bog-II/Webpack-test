@@ -1,4 +1,2 @@
 import { helloWebPack } from './helloWebpack';
-
-helloWebPack();
-helloWebPack();
+import "./styles/test.scss"
