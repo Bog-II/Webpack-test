@@ -1,5 +1,4 @@
-import './styles.scss';
-import { camelCase } from 'lodash';
+import { helloWebPack } from './helloWebpack';
 
-console.log(camelCase('hi mom!'));
-console.log(camelCase("I'm herehfffgh"));
+helloWebPack();
+helloWebPack();

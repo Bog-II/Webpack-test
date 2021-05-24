@@ -1,31 +1,40 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: path.resolve(__dirname, './src/index.js'),
   output: {
+    path: path.resolve(__dirname, './dist'),
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
   },
 
   module: {
     rules: [
       {
-        test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          'style-loader',
-          // Translates CSS into CommonJS
-          'css-loader',
-          // Compiles Sass to CSS
-          'sass-loader',
-        ],
+        test: /\.html$/i,
+        loader: 'html-loader',
+        options: {
+          minimize: true,
+        },
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: '[name][hash][ext]'
+        }
+        // options: {
+        //   name: '[name].[ext]',
+        // },
       },
     ],
   },
 
-  devServer: {
-    contentBase: path.join(__dirname, 'public/'),
-    port: 9999,
-    hot: true,
-  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public/index.html'),
+      filename: 'index.html',
+    }),
+  ],
 };
